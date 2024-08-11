@@ -1,24 +1,24 @@
-
 from autogen import AssistantAgent
-from agoric_sdk import ContractAPI
+from agoric_sdk import Pegasus, Wallet
 
 class AssetManagementAgent:
     def __init__(self):
         self.assistant = AssistantAgent("asset_management_assistant")
-        self.contract_api = ContractAPI("https://api.agoric.net")
+        self.pegasus = Pegasus()
+        self.wallet = Wallet("ExampleBrand")  # Cüzdanı belirli bir brand ile oluşturun
 
     def transfer_assets(self, from_address, to_address, amount):
         try:
-            # Transfer assets from one address to another
-            transfer_result = self.contract_api.transfer(from_address, to_address, amount)
+            # Transfer assets from one address to another using Pegasus
+            transfer_result = self.pegasus.transfer(from_address, to_address, amount)
             return transfer_result
         except Exception as e:
             return f"Failed to transfer assets: {str(e)}"
 
     def get_balance(self, address):
         try:
-            # Get the balance of the given address
-            balance = self.contract_api.get_balance(address)
+            # Simulate getting balance by checking the wallet's balance
+            balance = self.wallet.get_balance()
             return balance
         except Exception as e:
             return f"Failed to get balance: {str(e)}"
